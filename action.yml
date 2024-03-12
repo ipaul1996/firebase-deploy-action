@@ -1,0 +1,41 @@
+name: "Firebase Hosting Deployment Action"
+description: "A GitHub Action to deploy a web application to Firebase Hosting"
+author: IP
+
+inputs:
+  firebaseServiceAccount:
+    description: "Service account key to authenticate with Firebase"
+    required: true
+  deploymentType:
+    description: "The type of deployment environment for Firebase Hosting. Use live for production deployments or preview for staging or testing environments."
+    required: true
+  hostingChannelId:
+    description: "The unique identifier of the hosting channel in Firebase Hosting. This is required when deploying to a preview environment (deploymentType = preview). You can find the channel ID in the Firebase Hosting console."
+    required: false
+  previewExpires:
+    description: "How long a preview will be accessible?"
+    default: "3d"
+    required: false
+  deployTarget:
+    description: "A short-name identifier to a Firebase resource or a group of Firebase resources"
+    required: false
+  entryPoint:
+    description: "The location of your firebase.json file, relative to the root of your directory"
+    default: "."
+    required: false
+  firebaseToolsVersion:
+    description: "The version of firebase-tools to use. Defaults to latest"
+    default: latest
+    required: false
+
+outputs:
+  preview_expires:
+    description: "How long a preview will be accessible?"
+  deploy_url:
+    description: "A single URL that was deployed to"
+  deploy_urls:
+    description: "All the URLs that were deployed to"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
