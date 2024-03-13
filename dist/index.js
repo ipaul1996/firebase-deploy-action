@@ -28880,7 +28880,7 @@ const run = async () => {
 
       for (let key in deploymentResult) {
         if (!expireTimeStamp) {
-          expireTimeStamp = result.expireTime;
+          expireTimeStamp = deploymentResult[key].expireTime;
         }
 
         deploymentUrls.push(deploymentResult[key].url);
